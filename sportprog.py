@@ -18,7 +18,7 @@ app.secret_key=os.urandom(24)
 
 login_manager=LoginManager()
 login_manager.init_app(app)
-#Configuration
+#Configuration for google oauth 
 GOOGLE_CLIENT_ID=os.getenv("GOOGLE_CLIENT_ID")
 GOOGLE_CLIENT_SECRET=os.getenv("GOOGLE_CLIENT_SECRET")
 GOOGLE_DISCOVERY_URL = (
@@ -27,17 +27,22 @@ GOOGLE_DISCOVERY_URL = (
 
 client=WebApplicationClient(GOOGLE_CLIENT_ID)
 
+#gets the user object and stores it in session. Refer to flask_login docs.
 @login_manager.user_loader
 def load_user(user_id):
     dbuser=utilities.users.get(user_id)
     user=User(user_id,dbuser[1],dbuser[2])
     return user
+
 def get_google_provider_cfg():
     return requests.get(GOOGLE_DISCOVERY_URL).json()
+
+#The home page
 @app.route('/')
 def index():
     return render_template("index.html")
 
+#google oauth login client endpoint
 @app.route('/login')
 def login():
     google_provider_cfg = get_google_provider_cfg()
@@ -50,6 +55,7 @@ def login():
                 )
     return redirect(request_uri)
 
+#Handles callback from google oauth
 @app.route('/login/callback')
 def callback():
     code=request.args.get("code")
@@ -79,6 +85,7 @@ def callback():
     utilities.add_user(id_str)
     utilities.update_user(id_str,{"email":email,"name":name})
     user=User(id_str,name,email) 
+    #refer flask_login doc.
     login_user(user)
     return redirect(url_for("index")) 
 

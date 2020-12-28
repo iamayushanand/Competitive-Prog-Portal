@@ -1,4 +1,11 @@
+#This code was originally written by Manav Kapoor and Rohan Singh.
+#As a part of the IITJ-pclub-bot implementation 
+#https://github.com/rohansingh9001/IITJ-Pclub-Bot
+#
+#This file provides Helper function which make the handling with 
+#SQLite3 database easier in python.
 import sqlite3
+
 
 
 # A clean function to prevent SQL injections.

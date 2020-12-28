@@ -1,3 +1,5 @@
+#This file contains helper functions which use the sql.py to perform routine operations 
+#on users like adding them to database for first time or updating values.
 from sql import Database, Table, Column
 
 db=Database("data.db")
