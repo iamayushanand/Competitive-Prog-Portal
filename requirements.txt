@@ -1,0 +1,5 @@
+requests==2.25.0
+oauthlib==3.1.0
+Flask==1.1.2
+Flask_Login==0.5.0
+python-dotenv==0.15.0
