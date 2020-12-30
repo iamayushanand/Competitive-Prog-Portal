@@ -16,6 +16,7 @@ from dotenv import load_dotenv
 app = Flask(__name__)
 app.secret_key=os.urandom(24)
 
+load_dotenv();
 login_manager=LoginManager()
 login_manager.init_app(app)
 #Configuration for google oauth 
