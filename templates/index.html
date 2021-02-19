@@ -13,15 +13,20 @@
 	</div>
 	<div class="container">
 		<h1 style="font-family:monospace;text-align:center;">Recent/Upcoming Events</h1>
-		<div class="card-columns">
+		<div class="card-deck row flex-row flex-nowrap" style="overflow-x:auto">
+
+		{% for contest in upcomingContests %}
+		<div class="col-xl-6 col-md-6 col-sm-12">
 		<div class="card">
 			<div class="card-body">
-				<h2 class="card-title">Codechef December long</h2>
-				<p class="card-text">Participate in the Codechef December long challenge 2020</p>
-				<a href="http://www.codechef.com" class="btn btn-primary">Join</a>
+				<h2 class="card-title">{{ contest.name }}</h2>
+				<p class="card-text">Codeforces contest begins at {{ contest.date }}</p>
+				<a href="{{ contest.link }}" class="btn btn-primary">Join</a>
 			</div>
 		</div>
 		</div>
+		{% endfor %}
+		</div>	
 		
 	</div>
 {% endblock %}

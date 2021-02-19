@@ -1,9 +1,10 @@
 class User:
     
-    def __init__(self,id_str,name,email):
+    def __init__(self,id_str,name,email,picture):
         self.id_str=id_str
         self.name=name
         self.email=email
+        self.picture=picture
     def is_active(self):
         return True
     def is_anonymous(self):

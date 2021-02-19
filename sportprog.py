@@ -1,4 +1,5 @@
 import requests
+from contestParser import Codeforces 
 from flask import Flask, redirect, request, url_for, render_template
 from flask_login import (
             LoginManager,
@@ -27,12 +28,11 @@ GOOGLE_DISCOVERY_URL = (
             )
 
 client=WebApplicationClient(GOOGLE_CLIENT_ID)
-
 #gets the user object and stores it in session. Refer to flask_login docs.
 @login_manager.user_loader
 def load_user(user_id):
     dbuser=utilities.users.get(user_id)
-    user=User(user_id,dbuser[1],dbuser[2])
+    user=User(user_id,dbuser[1],dbuser[3],dbuser[2])
     return user
 
 def get_google_provider_cfg():
@@ -41,7 +41,8 @@ def get_google_provider_cfg():
 #The home page
 @app.route('/')
 def index():
-    return render_template("index.html")
+    upcomingContests=Codeforces()
+    return render_template("index.html",upcomingContests=upcomingContests)
 
 #google oauth login client endpoint
 @app.route('/login')
@@ -82,10 +83,12 @@ def callback():
     id_str=userinfo_response.json()['sub']
     email=userinfo_response.json()['email']
     name=userinfo_response.json()['given_name']
+    pic=userinfo_response.json()['picture']
+    print(pic)
     #adds user to db
     utilities.add_user(id_str)
-    utilities.update_user(id_str,{"email":email,"name":name})
-    user=User(id_str,name,email) 
+    utilities.update_user(id_str,{"email":email,"name":name,"picture":pic})
+    user=User(id_str,name,email,pic) 
     #refer flask_login doc.
     login_user(user)
     return redirect(url_for("index")) 
