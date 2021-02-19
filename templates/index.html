@@ -2,9 +2,9 @@
 {% block content %}
 	<div class="jumbotron jumbotron-fluid"  style="background-color:black;">
 		<div class="container">
-			<h1 style="font-family:fantasy;color:white;text-align:center">IIT jodhpur sport programming community</h1>
+			<h1 style="font-family:monospace;color:white;text-align:center">IIT jodhpur sport programming community</h1>
 			<hr>
-			<p style="color:white;text-align:center">code never lies,comments sometime do</p>
+			<p style="color:white;text-align:center">code never lies, comments sometime do.</p>
 			<hr>
 			{% if current_user.is_authenticated %}
 			<p style="color:white;text-align:center">logged in as {{ current_user.name }}</p> 
@@ -12,7 +12,7 @@
 		</div>
 	</div>
 	<div class="container">
-		<h1 style="font-family:fantasy;text-align:center;">Recent/Upcoming Events</h1>
+		<h1 style="font-family:monospace;text-align:center;">Recent/Upcoming Events</h1>
 		<div class="card-columns">
 		<div class="card">
 			<div class="card-body">
