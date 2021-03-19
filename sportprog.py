@@ -32,7 +32,7 @@ client=WebApplicationClient(GOOGLE_CLIENT_ID)
 @login_manager.user_loader
 def load_user(user_id):
     dbuser=utilities.users.get(user_id)
-    user=User(user_id,dbuser[1],dbuser[3],dbuser[2])
+    user=User(user_id,dbuser[3],dbuser[1],dbuser[2])
     return user
 
 def get_google_provider_cfg():
@@ -44,6 +44,13 @@ def index():
     upcomingContests=Codeforces()
     return render_template("index.html",upcomingContests=upcomingContests)
 
+@app.route('/profile')
+def profile():
+    return render_template("profile.html")
+
+@app.route('/blog')
+def blog():
+    return render_template("blog.html")
 #google oauth login client endpoint
 @app.route('/login')
 def login():
